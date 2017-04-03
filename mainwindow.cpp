@@ -7,7 +7,7 @@
 #include <QVector2D>
 #include "kinematics.h"
 
-static const unsigned int __initialBallCount = 10;
+static const unsigned int __initialBallCount = 30;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -51,8 +51,7 @@ void MainWindow::timerEvent(QTimerEvent *ev) {
                 BallState s2 = (*it)->state();
                 QVector2D ort = (s2.x - s1.x);
                 float r = ort.length();
-                if (r == 0) qDebug() << "zero-length vector";
-                ort /= r;
+                ort.normalize();
                 s1.a += force(r) * ort;
             }
             intFixedStep(s1);

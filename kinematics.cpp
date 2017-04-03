@@ -1,7 +1,7 @@
 #include "kinematics.h"
 
 float force(float r) {
-    return (1 / r - 1 / (r*r));
+    return (r != 0) ? (1 / r - 1 / (r*r)) : (qrand() % 2);
 }
 
 BallState intFixedStep(BallState &s,
