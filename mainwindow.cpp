@@ -44,17 +44,18 @@ void MainWindow::timerEvent(QTimerEvent *ev) {
          i != _balls.end();
          ++i) {
         BallState s1 = (*i)->state();
-        for (auto it = _balls.begin();
+        for (auto it = i;
              it != _balls.end();
              ++it) {
             if (i != it) {
-                BallState s2 = (*it)->state();
+                BallState &s2 = (*it)->state();
                 QVector2D ort = (s2.x - s1.x);
                 float r = ort.length();
                 ort.normalize();
                 s1.a += force(r) * ort;
+                s2.a -= force(r) * ort;
             }
-            intFixedStep(s1);
+            intFixedStep(s1, 0.1);
         }
         (*i)->setState(s1);
     }
