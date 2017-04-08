@@ -24,6 +24,7 @@ public:
                QWidget *widget);
     void setState(const BallState &state) { _state = state; }
     BallState state() const { return _state; }
+    BallState &state() { return _state; }
 protected:
     void advance(int phase);
 private:
