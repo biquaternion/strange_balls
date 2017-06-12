@@ -3,11 +3,10 @@
 
 #include <QMainWindow>
 #include <QTimerEvent>
-#include <QGraphicsScene>
-#include <QGraphicsItem>
-#include <QPainter>
-#include <QVector2D>
+#include "almanac.h"
+#include "ballscene.h"
 #include "ball.h"
+#include <memory>
 
 namespace Ui {
 class MainWindow;
@@ -26,8 +25,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QGraphicsScene _scene;
-    Balls          _balls;
+    BallScene _scene;
+    Balls     _state;
+    std::unique_ptr<Almanac> _almanac;
     void timerEvent(QTimerEvent*);
 };
 
