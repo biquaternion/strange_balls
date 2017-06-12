@@ -13,11 +13,17 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    kinematics.cpp \
-    ball.cpp
+    ball.cpp \
+    ballscene.cpp \
+    integrator.cpp \
+    ballitem.cpp \
+    almanac.cpp
 
 HEADERS  += mainwindow.h \
-    kinematics.h \
-    ball.h
+    ball.h \
+    ballscene.h \
+    integrator.h \
+    ballitem.h \
+    almanac.h
 
 FORMS    += mainwindow.ui

@@ -1,45 +1,26 @@
 #include "ball.h"
 
-Ball::Ball() {
-    setPos(qrand() % 256,
-           qrand() % 256);
+static const QRect __rect = {-320, -320, 640, 640};
+
+Ball::Ball(BallItem *item) :
+    _item(item) {
     init();
 }
 
-Ball::Ball(float x,
-           float y) {
-    setPos(x, y);
-    init();
+void Ball::setItem(BallItem *item) {
+    _item = item;
 }
 
-Ball::~Ball() {}
-
-QRectF Ball::boundingRect() const {
-    return _rect;
-}
-
-void Ball::paint(QPainter *painter,
-                 const QStyleOptionGraphicsItem *option,
-                 QWidget *widget) {
-    painter->setBrush(_color);
-    painter->drawEllipse(_rect);
-//    painter->drawText(QPointF(3, 3), );
-}
-
-void Ball::advance(int phase) {
-    if (phase == 0) {
-
-    } else { // phase == 1
-        setPos(_state.x.toPointF());
+void Ball::notifyItem() {
+    if (_item != nullptr) {
+        if (!_item->move())
+            _item->setPos(this->x.toPointF());
     }
 }
 
 void Ball::init() {
-    _rect  = QRectF(-5, -5, 10, 10);
-    _color = QColor(qrand() % 256,
-                    qrand() % 256,
-                    qrand() % 256);
-    _state.x = QVector2D(this->pos());
-    _state.v = QVector2D(0, 0);
-    _state.a = QVector2D(0, 0);
+    x = {qrand() % __rect.width()  + __rect.left(),
+         qrand() % __rect.height() + __rect.top()};
+    v = {0, 0};
+    a = {0, 0};
 }
